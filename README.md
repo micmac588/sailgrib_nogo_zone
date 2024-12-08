@@ -3,7 +3,7 @@ Build nogo zone kml file for Sailgrib.
 
 Longitude may be incremented automatically (usefull for the Vendee globe ZEA).
 
-Type CTRL-C to stop, then a file data.kml is produced.
+You are requested longitude and latitude, type CTRL-C to stop, then a file data.kml is produced.
 
 The last point is automatically added to close the parallelogramme.
 

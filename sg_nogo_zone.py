@@ -1,13 +1,13 @@
 
 #!/usr/bin/python3
 # -*- coding: utf-8 -*- 
-from latitude_converter import LatitudeConverter
-from longitude_converter import LongitudeConverter
+from latitude import Latitude
+from longitude import Longitude
 import logging
 import signal
 import sys
 from jinja2 import Environment, FileSystemLoader
- 
+
 def handler(signum, frame):
     global parallelogramme
     parallelogramme = close_parallelogramme(parallelogramme)
@@ -28,14 +28,17 @@ signal.signal(signal.SIGINT, handler)
 
 parallelogramme = ""
 my_logger = logging.getLogger()
+# TODO my_logger.setLevel(logging.DEBUG)
 longitude = int(input("first longitude "))
 step = int(input("longitude step in degrees "))
 while (True):
     try:
         degrees, minutes, card = input(f"longitude ({longitude} 00 E)? ").split() or f"{longitude} 00 E".split()
-        longitude = LongitudeConverter(my_logger, '.').from_ddm(int(degrees),float(minutes),str(card)).to_dd().split('°')[0]
+        longitude = Longitude.from_ddm(int(degrees),float(minutes),str(card)).to_dd().split('°')[0]
+        my_logger.error(f"longitude {longitude}")
         degrees, minutes, card = input(f"latitude? ").split()
-        latitude = LatitudeConverter(my_logger, '.').from_ddm(int(degrees),float(minutes),str(card)).to_dd().split('°')[0]
+        latitude = Latitude.from_ddm(int(degrees),float(minutes),str(card)).to_dd().split('°')[0]
+        my_logger.error(f"latitude {latitude}")
         parallelogramme = parallelogramme + position(latitude, longitude)
         longitude = int(longitude.split('.')[0]) + step
     except Exception as e:
