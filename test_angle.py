@@ -3,7 +3,7 @@ import logging
 
 # https://www.fcc.gov/media/radio/dms-decimal
 
-my_logger = logging.getLogger('test_degree_converter')
+my_logger = logging.getLogger('test_angle')
 my_logger.setLevel(logging.DEBUG)
 
 

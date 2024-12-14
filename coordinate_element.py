@@ -14,6 +14,10 @@ class CoordinateElement():
     @abc.abstractmethod
     def get_prefix(self, card):
         return
+    
+    @classmethod
+    def from_str(cls, str_value, card):
+        return cls(Angle.from_str(str_value), card)
 
     @classmethod
     def from_dms(cls, degree, minutes, seconds, card):
@@ -31,7 +35,7 @@ class CoordinateElement():
         return cls(Angle.from_dd(degree), card)
 
     def to_dms(self):
-        return f"{self._prefix}{self.__angle.to_dms()}"
+        return f"{self.get_prefix(self.__card)}{self.__angle.to_dms()}"
 
     def to_ddm(self, decimal_separator='.'):
         return f"{self.get_prefix(self.__card)}{self.__angle.to_ddm(decimal_separator)}"
