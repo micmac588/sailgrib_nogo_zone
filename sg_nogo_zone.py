@@ -1,8 +1,7 @@
 
 #!/usr/bin/python3
 # -*- coding: utf-8 -*- 
-from latitude import Latitude
-from longitude import Longitude
+from coordinate import Coordinate
 import logging
 import signal
 import sys
@@ -34,10 +33,10 @@ step = int(input("longitude step in degrees "))
 while (True):
     try:
         degrees, minutes, card = input(f"longitude ({longitude} 00 E)? ").split() or f"{longitude} 00 E".split()
-        longitude = Longitude.from_ddm(int(degrees),float(minutes),str(card)).to_dd().split('°')[0]
+        longitude = Coordinate.from_ddm(int(degrees),float(minutes),str(card)).to_dd().split('°')[0]
         my_logger.error(f"longitude {longitude}")
         degrees, minutes, card = input(f"latitude? ").split()
-        latitude = Latitude.from_ddm(int(degrees),float(minutes),str(card)).to_dd().split('°')[0]
+        latitude = Coordinate.from_ddm(int(degrees),float(minutes),str(card)).to_dd().split('°')[0]
         my_logger.error(f"latitude {latitude}")
         parallelogramme = parallelogramme + position(latitude, longitude)
         longitude = int(longitude.split('.')[0]) + step
